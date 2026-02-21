@@ -1,0 +1,54 @@
+{
+  "name": "app-prisma6",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "start": "nest start --watch",
+    "migrate": "prisma migrate deploy",
+    "generate": "prisma generate",
+    "seed": "prisma db seed"
+  },
+  "dependencies": {
+    "@as-integrations/express5": "^1.1.2",
+    "@nestjs/common": "^11.1.9",
+    "@nestjs/core": "^11.1.9",
+    "@nestjs/platform-express": "^11.1.9",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.212.0",
+    "@opentelemetry/instrumentation-express": "^0.60.0",
+    "@opentelemetry/instrumentation-http": "^0.212.0",
+    "@opentelemetry/instrumentation-nestjs-core": "^0.58.0",
+    "@opentelemetry/resources": "^2.5.1",
+    "@opentelemetry/sdk-node": "^0.212.0",
+    "@opentelemetry/sdk-trace-node": "^2.5.1",
+    "@opentelemetry/semantic-conventions": "^1.39.0",
+    "@prisma/client": "link:prisma-fork/packages/client",
+    "@pyroscope/nodejs": "^0.4.8",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.3.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.14",
+    "@nestjs/schematics": "^11.0.9",
+    "@nestjs/testing": "^11.1.9",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "prisma": "link:prisma-fork/packages/cli",
+    "rimraf": "^6.0.1",
+    "source-map-support": "^0.5.21",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "^5.9.2"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(head:*)",
+      "Bash(gh api:*)",
+      "Bash(which pnpm:*)",
+      "Bash(pnpm import:*)",
+      "Bash(pnpm add:*)",
+      "Bash(git clone:*)",
+      "Bash(git submodule:*)",
+      "Bash(pnpm install:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(node:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:docs.victoriametrics.com)",
+      "WebSearch",
+      "Bash(docker compose:*)",
+      "Bash(python3:*)",
+      "Bash(docker network inspect sql-tarcing-prisma-demo_default 2>&1 | python3 -c \"\nimport json, sys\ndata = json.load\\(sys.stdin\\)[0]\nprint\\('Network:', data['Name']\\)\nprint\\('Containers:'\\)\nfor cid, info in data.get\\('Containers', {}\\).items\\(\\):\n    print\\(f'  {info[\\\\\"Name\\\\\"]}: {info[\\\\\"IPv4Address\\\\\"]}'\\)\" 2>&1)",
+      "Bash(docker network:*)",
+      "Bash(chmod +x:*)",
+      "WebFetch(domain:openobserve.ai)"
+    ]
+  }
+}

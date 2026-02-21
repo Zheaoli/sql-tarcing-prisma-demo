@@ -1,0 +1,60 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8084:8084"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/prisma?statement_cache_size=0
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    depends_on:
+      postgres:
+        condition: service_healthy
+      openobserve:
+        condition: service_started
+
+  postgres:
+    build: ./postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: prisma
+    volumes:
+      - ./postgres/pg_tracing.conf:/etc/postgresql/pg_tracing.conf:ro
+      - pgdata:/var/lib/postgresql/data
+    command: >
+      postgres
+        -c config_file=/etc/postgresql/pg_tracing.conf
+        -c listen_addresses='*'
+        -c log_statement=all
+        -c log_destination=stderr
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml:ro
+    ports:
+      - "4318:4318"
+    depends_on:
+      openobserve:
+        condition: service_started
+
+  openobserve:
+    image: public.ecr.aws/zinclabs/openobserve:latest
+    ports:
+      - "5080:5080"
+    environment:
+      ZO_ROOT_USER_EMAIL: root@example.com
+      ZO_ROOT_USER_PASSWORD: Complexpass#123
+    volumes:
+      - o2data:/data
+
+volumes:
+  pgdata:
+  o2data:

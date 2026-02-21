@@ -1,0 +1,4 @@
+[submodule "prisma-fork"]
+	path = prisma-fork
+	url = https://github.com/Zheaoli/prisma.git
+	branch = sql-comment-exp
