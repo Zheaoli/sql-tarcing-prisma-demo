@@ -6,12 +6,12 @@ import { PrismaService } from "./prisma.service";
 function getSqlComments(req: Request): Record<string, string> {
   const comments: Record<string, string> = {};
 
-  // // Request info
-  // comments.route = req.path;
-  // comments.method = req.method;
-  // if (req.route?.path) {
-  //   comments["route_pattern"] = req.route.path;
-  // }
+  // Request info
+  comments.route = req.path;
+  comments.method = req.method;
+  if (req.route?.path) {
+    comments["route_pattern"] = req.route.path;
+  }
 
   // OpenTelemetry trace context
   const span = trace.getSpan(context.active());
